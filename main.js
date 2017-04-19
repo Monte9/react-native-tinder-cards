@@ -1,21 +1,23 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-import { Button, Card } from 'react-native-elements'
+import { Button, Card, Icon } from 'react-native-elements'
 
 import Deck from './src/Deck'
 
+const SCREEN_WIDTH =  Dimensions.get('window').width;
+const SCREEN_HEIGHT =  Dimensions.get('window').height;
+
 // test data
 const DATA = [
-  { id: 1, text: 'Card #1', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-04.jpg' },
-  { id: 2, text: 'Card #2', uri: 'http://www.fluxdigital.co/wp-content/uploads/2015/04/Unsplash.jpg' },
-  { id: 3, text: 'Card #3', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-09.jpg' },
-  { id: 4, text: 'Card #4', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-01.jpg' },
-  { id: 5, text: 'Card #5', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-04.jpg' },
-  { id: 6, text: 'Card #6', uri: 'http://www.fluxdigital.co/wp-content/uploads/2015/04/Unsplash.jpg' },
-  { id: 7, text: 'Card #7', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-09.jpg' },
-  { id: 8, text: 'Card #8', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-01.jpg' },
+  { id: 1, text: 'Amanda', uri: 'http://f9view.com/wp-content/uploads/2013/10/American-Beautiful-Girls-Wallpapers-Hollywood-Celebs-1920x1200px.jpg' },
+  { id: 2, text: 'Emma', uri: 'https://i.imgur.com/FHxVpN4.jpg' },
+  { id: 3, text: 'Scarlett', uri: 'https://i.ytimg.com/vi/GOJZ5TIlc3M/maxresdefault.jpg' },
+  { id: 4, text: 'Keira', uri: 'http://www.bdprimeit.com/wp-content/uploads/Keira-Knightley-Most-beautiful-Hollywood-actress.jpg' },
+  { id: 5, text: 'Ashley', uri: 'https://s-media-cache-ak0.pinimg.com/736x/4c/89/67/4c8967fac1822eeddf09670565430fd5.jpg' },
+  { id: 6, text: 'Jennifer', uri: 'https://2.bp.blogspot.com/-Vy0NVWhQfKo/Ubma2Mx2YTI/AAAAAAAAH3s/LC_u8LRfm8o/s1600/aimee-teegarden-04.jpg' },
+  { id: 7, text: 'Sarah', uri: 'https://s-media-cache-ak0.pinimg.com/736x/41/75/26/4175268906d97492e4a3175eab95c0f5.jpg' },
 ];
 
 class App extends Component {
@@ -23,16 +25,12 @@ class App extends Component {
     return (
       <Card
         key={card.id}
-        title={card.text}
+        containerStyle={{borderRadius: 10, width: SCREEN_WIDTH * 0.92, height: SCREEN_HEIGHT - 165}}
+        featuredTitle={card.text}
+        featuredTitleStyle={{position: 'absolute', left: 15, bottom: 10 }}
         image={{ uri: card.uri }}
-      >
-        <Text style={{ marginBottom: 10 }}>I can customize the card further</Text>
-        <Button
-          icon={{ name: 'code' }}
-          backgroundColor="#03a9f4"
-          title="View now!"
-        />
-      </Card>
+        imageStyle={{borderRadius: 10, width: SCREEN_WIDTH * 0.915, height: SCREEN_HEIGHT - 165}}
+      />
     )
   }
 
@@ -46,29 +44,101 @@ class App extends Component {
 
   renderNoMoreCards() {
     return (
-      <Card title= "All done!">
-        <Text style={{ marginBottom: 10 }}>
-          All cards have been swiped! No more. 
-        </Text>
-        <Button
-          icon={{ name: 'code' }}
-          backgroundColor="#03a9f4"
-          title="Load More!"
-        />
-      </Card>
+      <Card
+        containerStyle={{borderRadius: 10, width: SCREEN_WIDTH * 0.92, height: SCREEN_HEIGHT - 165}}
+        featuredTitle="No more cards"
+        featuredTitleStyle={{fontSize: 25}}
+        image={{ uri: 'https://i.imgflip.com/1j2oed.jpg' }}
+        imageStyle={{borderRadius: 10, width: SCREEN_WIDTH * 0.915, height: SCREEN_HEIGHT - 165}}
+      />
+    )
+  }
+
+  renderHeader() {
+    return (
+      <View style={styles.header}>
+        <View style={styles.headerLeftIcon}>
+          <Icon name='user' type='font-awesome' color='#ccc' size={35} />
+        </View>
+        <View style={styles.headerCenter}>
+          <View style={styles.headerCenterToggleContainer}>
+            <View style={styles.headerCenterToggleLeft}>
+              <Icon name='fire' type='material-community' color='#fff' size={28} />
+            </View>
+            <View style={styles.headerCenterToggleRight}>
+              <Icon name='group' type='font-awesome' color='#ccc' size={25} />
+            </View>
+          </View>
+        </View>
+        <View style={styles.headerRightIcon}>
+          <Icon name='comments' type='font-awesome' color='#ccc' size={35} />
+        </View>
+      </View>
+    )
+  }
+
+  renderFooter() {
+    return (
+      <View style={styles.footer}>
+        <View style={[styles.footerIcon, { paddingLeft: 10 }]}>
+          <Icon
+            containerStyle={{backgroundColor: 'white', width: 50, height: 50, borderRadius: 25}}
+            name='replay'
+            size={30}
+            color='orange'
+          />
+        </View>
+        <View style={styles.footerIcon}>
+          <Icon
+            containerStyle={{backgroundColor: 'white', width: 60, height: 60, borderRadius: 30}}
+            name='close'
+            size={45}
+            color='red'
+          />
+        </View>
+        <View style={styles.footerIcon}>
+          <Icon
+            containerStyle={{backgroundColor: 'white', width: 48, height: 48, borderRadius: 24}}
+            name='bolt'
+            type='font-awesome'
+            size={30}
+            color='purple'
+          />
+        </View>
+        <View style={styles.footerIcon}>
+          <Icon
+            containerStyle={{backgroundColor: 'white', width: 60, height: 60, borderRadius: 30}}
+            name='favorite'
+            size={35}
+            color='green'
+          />
+        </View>
+        <View style={[styles.footerIcon, { paddingRight: 10 }]}>
+          <Icon
+            containerStyle={{backgroundColor: 'white', width: 50, height: 50, borderRadius: 25}}
+            name='star'
+            size={30}
+            color='blue'
+          />
+        </View>
+      </View>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Deck
-          data={DATA}
-          renderCard={this.renderCard}
-          renderNoMoreCards={this.renderNoMoreCards}
-          onSwipeRight={this.onSwipeRight}
-          onSwipeLeft={this.onSwipeLeft}
-        />
+        {this.renderHeader()}
+        <View style={styles.deck}>
+          <Deck
+            data={DATA}
+            renderCard={this.renderCard}
+            renderNoMoreCards={this.renderNoMoreCards}
+            onSwipeRight={this.onSwipeRight}
+            onSwipeLeft={this.onSwipeLeft}
+          />
+        </View>
+        {this.renderFooter()}
       </View>
     );
   }
@@ -77,8 +147,68 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#F4F4F4'
   },
+  header: {
+    height: 64,
+    paddingTop: 35,
+    flexDirection: 'row'
+  },
+  headerLeftIcon: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginLeft: 15
+  },
+  headerCenter: {
+    flex: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  headerCenterToggleContainer: {
+    flexDirection: 'row',
+    width: 160,
+    height: 45,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#ccc',
+  },
+  headerCenterToggleLeft: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ff0000',
+    borderRadius: 30
+  },
+  headerCenterToggleRight: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  headerRightIcon: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginRight: 20
+  },
+  deck: {
+    flex: 1
+  },
+  footer: {
+    height: 64,
+    flexDirection: 'row',
+    paddingBottom: 10
+  },
+  footerIcon: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    margin: 10
+  }
 });
 
 Expo.registerRootComponent(App);
