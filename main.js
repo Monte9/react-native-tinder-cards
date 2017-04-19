@@ -147,7 +147,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4f4f4'
+    backgroundColor: 'rgba(211, 211, 211, 0.4)'
   },
   header: {
     height: 64, 

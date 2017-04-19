@@ -4,7 +4,7 @@ Tinder Cards like behaviour in React Native.
 
 ## Demo
 
-![demo](./tinder_cards_tutorial.gif)
+![demo](./tinder_cards_demo.gif)
 
 ## Motivation
 
