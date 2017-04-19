@@ -147,10 +147,10 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4F4F4'
+    backgroundColor: '#f4f4f4'
   },
   header: {
-    height: 64,
+    height: 64, 
     paddingTop: 35,
     flexDirection: 'row'
   },
