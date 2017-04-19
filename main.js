@@ -36,6 +36,14 @@ class App extends Component {
     )
   }
 
+  onSwipeRight(card) {
+    console.log("Card liked: " + card.text);
+  }
+
+  onSwipeLeft(card) {
+    console.log("Card disliked: " + card.text);
+  }
+
   renderNoMoreCards() {
     return (
       <Card title= "All done!">
@@ -58,6 +66,8 @@ class App extends Component {
           data={DATA}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
+          onSwipeRight={this.onSwipeRight}
+          onSwipeLeft={this.onSwipeLeft}
         />
       </View>
     );
